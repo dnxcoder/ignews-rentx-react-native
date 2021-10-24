@@ -28,16 +28,6 @@ const Home: React.FC = () => {
     thumbnail:
       "https://www.webmotors.com.br/imagens/prod/347517/PORSCHE_PANAMERA_4.0_V8_EHYBRID_TURBO_S_EXECUTIVE_PDK_34751719030946258.png?s=fill&w=130&h=97&q=70&t=true)",
   };
-  const carDataTree = {
-    brand: "AUDI",
-    name: "RS 5 Coupé",
-    rent: {
-      period: "AO DIA",
-      price: 120,
-    },
-    thumbnail:
-      "https://mediaservice.audi.com/media/live/50900/fly1400x601n1/f5f/2021.png?wid=850",
-  };
 
   return (
     <Container>
