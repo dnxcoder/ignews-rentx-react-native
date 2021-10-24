@@ -1,6 +1,7 @@
 import React from "react";
 import { useTheme } from "styled-components";
 import BackButton from "../../components/BackButton";
+import Calendar from "../../components/Calendar";
 
 import ArrowSvg from "../../assets/arrow.svg";
 import {
@@ -12,7 +13,7 @@ import {
   DateValue,
   DateInfo,
   Content,
-  Footer
+  Footer,
 } from "./styles";
 import { StatusBar } from "react-native";
 import Button from "../../components/Button";
@@ -47,11 +48,11 @@ const Schedulling: React.FC = () => {
           </DateInfo>
         </RentalPeriod>
       </Header>
-      <Content></Content>
+      <Content>
+        <Calendar />
+      </Content>
       <Footer>
-        <Button
-        title="Confirmar"
-        />
+        <Button title="Confirmar" />
       </Footer>
     </Container>
   );
