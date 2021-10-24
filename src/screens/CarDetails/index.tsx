@@ -24,7 +24,9 @@ import {
   Price,
   About,
   Accessories,
+  Footer,
 } from "./styles";
+import Button from "../../components/Button";
 
 const CarDetails: React.FC = () => {
   return (
@@ -65,6 +67,9 @@ const CarDetails: React.FC = () => {
           gosta de acelerar.
         </About>
       </Content>
+      <Footer>
+        <Button title="Confirmar" color="green"/>
+      </Footer>
     </Container>
   );
 };

@@ -13,6 +13,7 @@ background-color: ${({theme})=> theme.colors.background_primary};
 
 padding: 16px;
 margin-bottom: 8px;
+
 `;
 
 
