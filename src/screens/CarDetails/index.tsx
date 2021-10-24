@@ -68,7 +68,7 @@ const CarDetails: React.FC = () => {
         </About>
       </Content>
       <Footer>
-        <Button title="Confirmar" color="green"/>
+        <Button title="Confirmar" />
       </Footer>
     </Container>
   );
