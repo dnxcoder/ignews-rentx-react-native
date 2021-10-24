@@ -148,14 +148,14 @@ export const RentalPriceQuota = styled.Text`
 
   text-transform: uppercase;
 `;
-
+ 
 export const RentalPriceTotal = styled.Text`
   font-family: ${({ theme }) => theme.fonts.secondary_500};
   color: ${({ theme }) => theme.colors.success};
   font-size: ${RFValue(24)}px;
 
   text-transform: uppercase;
-`;
+`; 
 
 export const RentalPriceDetails = styled.View`
   width: 100%;
