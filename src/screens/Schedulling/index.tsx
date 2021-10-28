@@ -16,10 +16,16 @@ import {
   Footer,
 } from "./styles";
 import { StatusBar } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import Button from "../../components/Button";
 
 const Schedulling: React.FC = () => {
   const theme = useTheme();
+  const navigation: any = useNavigation();
+
+  function handleConfirm() {
+    navigation.navigate("SchedullingDetails");
+  }
 
   return (
     <Container>
@@ -52,7 +58,7 @@ const Schedulling: React.FC = () => {
         <Calendar />
       </Content>
       <Footer>
-        <Button title="Confirmar" />
+        <Button title="Confirmar" onPress={handleConfirm} />
       </Footer>
     </Container>
   );

@@ -17,6 +17,8 @@ import theme from "./src/styles/theme";
 import SchedullingDetails from "./src/screens/SchedullingDetails";
 import SchedullingComplete from "./src/screens/SchedullingComplete";
 
+import { Routes } from "./src/routes";
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
@@ -32,7 +34,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <SchedullingComplete />
+      <Routes />
     </ThemeProvider>
   );
 }

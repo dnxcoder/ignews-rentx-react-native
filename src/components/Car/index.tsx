@@ -1,5 +1,6 @@
 import React from "react";
 import { View } from "react-native";
+import { RectButtonProps } from "react-native-gesture-handler";
 import GasolineSvg from "../../assets/gasoline.svg";
 
 import {
@@ -21,17 +22,17 @@ interface ICarData {
   rent: {
     period: string;
     price: number;
-  },
+  };
   thumbnail: string;
 }
 
-interface IProps {
+interface IProps extends RectButtonProps {
   data: ICarData;
 }
 
-const Car: React.FC<IProps> = ({ data }) => {
+const Car: React.FC<IProps> = ({ data, ...rest }) => {
   return (
-    <Container>
+    <Container {...rest}>
       <Details>
         <Brand>{data.brand}</Brand>
         <Name>{`R$ ${data.name}`}</Name>
@@ -48,7 +49,7 @@ const Car: React.FC<IProps> = ({ data }) => {
       </Details>
       <CarImage
         source={{
-          uri: data.thumbnail
+          uri: data.thumbnail,
         }}
         resizeMode="contain"
       />

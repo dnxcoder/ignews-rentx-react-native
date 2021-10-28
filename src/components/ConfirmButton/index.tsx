@@ -8,7 +8,7 @@ interface Props extends RectButtonProps{
 
 const ConfirmButton: React.FC<Props> = ({title, ...rest}) => {
   return (
-    <Container>
+    <Container {...rest}>
       <Title>OK</Title>
     </Container>
   );

@@ -43,9 +43,15 @@ import Button from "../../components/Button";
 import { Feather } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useTheme } from "styled-components/native";
+import { useNavigation } from "@react-navigation/native";
 
 const SchedullingDetails: React.FC = () => {
   const theme = useTheme();
+  const navigation: any = useNavigation();
+
+  function handleConfirm() {
+    navigation.navigate("SchedullingComplete");
+  }
 
   return (
     <Container>
@@ -114,7 +120,9 @@ const SchedullingDetails: React.FC = () => {
         </RentalPrice>
       </Content>
       <Footer>
-        <Button title="Confirmar" />
+        <Button title="Confirmar" onPress={handleConfirm}
+        color={theme.colors.success}
+        />
       </Footer>
     </Container>
   );

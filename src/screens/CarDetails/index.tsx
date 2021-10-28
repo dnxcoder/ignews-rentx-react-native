@@ -26,13 +26,25 @@ import {
   Accessories,
   Footer,
 } from "./styles";
+import { useNavigation } from "@react-navigation/native";
+
 import Button from "../../components/Button";
 
 const CarDetails: React.FC = () => {
+  const navigation: any = useNavigation();
+
+  function handleConfirmRental() {
+    navigation.navigate("Schedulling");
+  }
+
   return (
     <Container>
       <Header>
-        <BackButton onPress={() => {}} />
+        <BackButton
+          onPress={() => {
+            navigation.goBack();
+          }}
+        />
       </Header>
       <CarImages>
         <ImageSlider
@@ -68,7 +80,10 @@ const CarDetails: React.FC = () => {
         </About>
       </Content>
       <Footer>
-        <Button title="Confirmar" />
+        <Button
+          onPress={handleConfirmRental}
+          title="Escolher periodo do aluguel"
+        />
       </Footer>
     </Container>
   );
