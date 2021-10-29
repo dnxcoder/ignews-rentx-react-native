@@ -2,6 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { RectButtonProps } from "react-native-gesture-handler";
 import GasolineSvg from "../../assets/gasoline.svg";
+import { CarDTO } from '../../dtos/CarDTO';
 
 import {
   Container,
@@ -16,18 +17,10 @@ import {
   CarImage,
 } from "./styles";
 
-interface ICarData {
-  brand: string;
-  name: string;
-  rent: {
-    period: string;
-    price: number;
-  };
-  thumbnail: string;
-}
+
 
 interface IProps extends RectButtonProps {
-  data: ICarData;
+  data: CarDTO;
 }
 
 const Car: React.FC<IProps> = ({ data, ...rest }) => {
