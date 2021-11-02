@@ -1,49 +1,47 @@
 import React from "react";
 import { Feather } from "@expo/vector-icons";
 import { useTheme } from "styled-components";
+import { generateInterval } from "./generateInterval";
+import { ptBR } from "./localeConfig";
 
 import {
   Calendar as CustomCalendar,
   LocaleConfig,
 } from "react-native-calendars";
 
-LocaleConfig.locales["pt-br"] = {
-  monthNames: [
-    "Janeiro",
-    "Fevereiro",
-    "Março",
-    "Abril",
-    "Maio",
-    "Junho",
-    "Julho",
-    "Agosto",
-    "Setembro",
-    "Outubro",
-    "Novembro",
-    "Dezembro",
-  ],
-  monthNamesShort: [
-    "Jan",
-    "Fev",
-    "Mar",
-    "Abr",
-    "Mai",
-    "Jun",
-    "Jul",
-    "Ago",
-    "Set",
-    "Out",
-    "Nov",
-    "Dez",
-  ],
-  dayNames: ["Domingo","Segunda, Terça, Quarta, Quinta, Sexta", "Sábado"],
-  dayNamesShort: ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"],
-  today: "Hoje",
-};
+LocaleConfig.locales["pt-br"] = ptBR;
+LocaleConfig.defaultLocale = "pt-br";
 
-LocaleConfig.defaultLocale = 'pt-br';
+interface MarkedDateProps {
+  [date: string]: {
+    color: string;
+    textColor: string;
+    disabled?: boolean;
+    disableToucEvent?: boolean;
+  };
+}
+interface DateData {
+  year: number;
+  month: number;
+  day: number;
+  timestamp: number;
+  dateString: string;
+}
 
-const Calendar: React.FC = () => {
+interface CalendarProps {
+  markedDates: MarkedDateProps;
+  onDayPress: (date: DateData) => void;
+}
+
+interface DayProps {
+  dateString: string;
+  day: number;
+  month: number;
+  year: number;
+  timestamp: number;
+}
+
+const Calendar: React.FC<CalendarProps> = ({ markedDates, onDayPress }) => {
   const theme = useTheme();
 
   return (
@@ -66,7 +64,7 @@ const Calendar: React.FC = () => {
         textDayFontFamily: theme.fonts.primary_400,
         textDayHeaderFontFamily: theme.fonts.primary_500,
         textDayHeaderFontSize: 10,
-        textMonthFontSize:20,
+        textMonthFontSize: 20,
         textMonthFontFamily: theme.fonts.secondary_600,
         monthTextColor: theme.colors.title,
         arrowStyle: {
@@ -75,8 +73,11 @@ const Calendar: React.FC = () => {
       }}
       firstDay={1}
       minDate={new Date()}
+      markingType="period"
+      markedDates={markedDates}
+      onDayPress={onDayPress}
     />
   );
 };
 
-export default Calendar;
+export { Calendar, MarkedDateProps, DayProps, generateInterval };

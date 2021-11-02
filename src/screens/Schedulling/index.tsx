@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTheme } from "styled-components";
 import BackButton from "../../components/BackButton";
-import Calendar from "../../components/Calendar";
+import {
+  Calendar,
+  DayProps,
+  generateInterval,
+  MarkedDateProps,
+} from "../../components/Calendar";
 
 import ArrowSvg from "../../assets/arrow.svg";
 import {
@@ -20,11 +25,31 @@ import { useNavigation } from "@react-navigation/native";
 import Button from "../../components/Button";
 
 const Schedulling: React.FC = () => {
+  const [lastSelectedDay, setLastSelectedDay] = useState<DayProps>(
+    {} as DayProps
+  );
+  const [markedDates, setMarkedDates] = useState<MarkedDateProps>(
+    {} as MarkedDateProps
+  );
   const theme = useTheme();
   const navigation: any = useNavigation();
 
   function handleConfirm() {
     navigation.navigate("SchedullingDetails");
+  }
+
+  function handleChangeDate(date: DayProps) {
+    let start = !lastSelectedDay.timestamp ? date : lastSelectedDay;
+    let end = date;
+
+    if (start.timestamp > end.timestamp) {
+      start = end;
+      end = start;
+    }
+
+    setLastSelectedDay(end);
+    const interval = generateInterval(start, end);
+    setMarkedDates(interval);
   }
 
   return (
@@ -35,7 +60,12 @@ const Schedulling: React.FC = () => {
           translucent
           backgroundColor="transparent"
         />
-        <BackButton onPress={() => {}} color={theme.colors.shape} />
+        <BackButton
+          onPress={() => {
+            navigation.goBack();
+          }}
+          color={theme.colors.shape}
+        />
 
         <Title>
           Escolha uma {"\n"} data de início e {"\n"} fim de aluguel
@@ -55,7 +85,7 @@ const Schedulling: React.FC = () => {
         </RentalPeriod>
       </Header>
       <Content>
-        <Calendar />
+        <Calendar markedDates={markedDates} onDayPress={handleChangeDate} />
       </Content>
       <Footer>
         <Button title="Confirmar" onPress={handleConfirm} />
