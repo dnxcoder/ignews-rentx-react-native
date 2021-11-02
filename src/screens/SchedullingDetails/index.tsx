@@ -56,7 +56,7 @@ const SchedullingDetails: React.FC = () => {
   return (
     <Container>
       <Header>
-        <BackButton onPress={() => {}} />
+        <BackButton onPress={() => {navigation.goBack()}} />
       </Header>
       <CarImages>
         <ImageSlider

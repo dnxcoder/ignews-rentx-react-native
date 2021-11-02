@@ -37,7 +37,7 @@ const CarDetails: React.FC = () => {
   const { car } = route.params as Params;
 
   function handleConfirmRental() {
-    navigation.navigate("Schedulling");
+    navigation.navigate("Schedulling", { car });
   }
 
   return (
