@@ -53,8 +53,8 @@ const Home: React.FC = () => {
       "https://www.webmotors.com.br/imagens/prod/347517/PORSCHE_PANAMERA_4.0_V8_EHYBRID_TURBO_S_EXECUTIVE_PDK_34751719030946258.png?s=fill&w=130&h=97&q=70&t=true)",
   };
 
-  function handleCarDetails() {
-    navigation.navigate("CarDetails");
+  function handleCarDetails(car: CarDTO) {
+    navigation.navigate("CarDetails", { car });
   }
 
   return (
@@ -77,7 +77,7 @@ const Home: React.FC = () => {
           data={cars}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <Car data={item} onPress={handleCarDetails} />
+            <Car data={item} onPress={() => handleCarDetails(item)} />
           )}
         />
       )}
