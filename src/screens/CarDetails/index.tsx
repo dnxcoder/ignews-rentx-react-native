@@ -3,12 +3,7 @@ import Accessory from "../../components/Accessory";
 import BackButton from "../../components/BackButton";
 import ImageSlider from "../../components/ImageSlider";
 
-import speedSvg from "../../assets/speed.svg";
-import accelerationSvg from "../../assets/acceleration.svg";
-import forceSvg from "../../assets/force.svg";
-import gasolineSvg from "../../assets/gasoline.svg";
-import exchangeSvg from "../../assets/exchange.svg";
-import peopleSvg from "../../assets/people.svg";
+import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
 
 import {
   Container,
@@ -55,9 +50,7 @@ const CarDetails: React.FC = () => {
         />
       </Header>
       <CarImages>
-        <ImageSlider
-          imageUrl={car.photos}
-        />
+        <ImageSlider imageUrl={car.photos} />
       </CarImages>
       <Content>
         <Details>
@@ -73,18 +66,16 @@ const CarDetails: React.FC = () => {
         </Details>
         <Accessories>
           {car.accessories.map((accesory, index) => {
-            return(
+            return (
               <Accessory
                 key={accesory.type}
                 name={accesory.name}
-                icon={accelerationSvg}
+                icon={getAccessoryIcon(accesory.type)}
               />
             );
           })}
         </Accessories>
-        <About>
-          {car.about}
-        </About>
+        <About>{car.about}</About>
       </Content>
       <Footer>
         <Button
