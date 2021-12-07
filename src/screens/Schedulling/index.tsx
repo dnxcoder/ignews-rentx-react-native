@@ -50,7 +50,7 @@ const Schedulling: React.FC = () => {
   const navigation: any = useNavigation();
 
   const route = useRoute()
-  const { car } = route.params as Params
+  const { car } = route.params as Params;
 
   function handleConfirmRental() {
     if (!rentalPeriod.startFormatted || !rentalPeriod.endFormatted) {

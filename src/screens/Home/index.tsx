@@ -2,28 +2,37 @@ import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar, Text } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
+import { Ionicons } from "@expo/vector-icons";
 
 import Logo from "../../assets/logo.svg";
 import Car from "../../components/Car";
 import { api } from "../../services/api";
 import { CarDTO } from "../../dtos/CarDTO";
 
-import { Container, Header, TotalCars, HeaderContent, CarList } from "./styles";
+import {
+  Container,
+  Header,
+  TotalCars,
+  HeaderContent,
+  CarList,
+  MyCarsButton,
+} from "./styles";
 import Load from "../../components/Load";
+import { useTheme } from "styled-components";
 
 const Home: React.FC = () => {
   const [cars, setCars] = useState<CarDTO[]>([]);
   const [loading, setLoading] = useState(true);
+
   const navigation: any = useNavigation();
+  const theme = useTheme();
 
   useEffect(() => {
     async function fetchCars() {
       try {
         const response = await api.get("/cars");
         setCars(response.data as CarDTO[]);
-        console.log(response.data);
       } catch (error) {
-        console.log(error);
       } finally {
         setLoading(false);
       }
@@ -32,29 +41,12 @@ const Home: React.FC = () => {
     fetchCars();
   }, []);
 
-  const carDataOne = {
-    brand: "AUDI",
-    name: "RS 5 Coupé",
-    rent: {
-      period: "AO DIA",
-      price: 120,
-    },
-    thumbnail:
-      "https://mediaservice.audi.com/media/live/50900/fly1400x601n1/f5f/2021.png?wid=850",
-  };
-  const carDataTwo = {
-    brand: "Porshe",
-    name: "Pamera",
-    rent: {
-      period: "AO DIA",
-      price: 340,
-    },
-    thumbnail:
-      "https://www.webmotors.com.br/imagens/prod/347517/PORSCHE_PANAMERA_4.0_V8_EHYBRID_TURBO_S_EXECUTIVE_PDK_34751719030946258.png?s=fill&w=130&h=97&q=70&t=true)",
-  };
-
   function handleCarDetails(car: CarDTO) {
     navigation.navigate("CarDetails", { car });
+  }
+
+  function handleOpenMyCars() {
+    navigation.navigate("MyCars");
   }
 
   return (
@@ -81,6 +73,9 @@ const Home: React.FC = () => {
           )}
         />
       )}
+      <MyCarsButton onPress={handleOpenMyCars}>
+        <Ionicons name="ios-car-sport" size={32} color={theme.colors.shape} />
+      </MyCarsButton>
     </Container>
   );
 };
