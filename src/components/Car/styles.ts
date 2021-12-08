@@ -12,7 +12,7 @@ flex-direction: row;
 justify-content: space-between;
 align-items: center;
 padding: 24px;
-margin: 16px;
+margin-top: 10px;
 `;
 
 export const Details = styled.View`
