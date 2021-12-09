@@ -60,6 +60,7 @@ const SchedullingDetails: React.FC = () => {
   const theme = useTheme();
   const navigation: any = useNavigation();
   const route = useRoute();
+  const [loading, setLoading] = useState(false);
   const { car, dates } = route.params as Params;
 
   const rentTotal = Number(dates.length * car.rent.price);
@@ -68,6 +69,7 @@ const SchedullingDetails: React.FC = () => {
     try {
       console.log(car.id);
 
+      setLoading(true);
       const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`);
 
       const unavailable_dates = [
@@ -82,7 +84,7 @@ const SchedullingDetails: React.FC = () => {
         endDate: format(
           getPlatformDate(new Date(dates[dates.length - 1])),
           "dd/MM/yyyy"
-        )
+        ),
       });
 
       api
@@ -94,7 +96,7 @@ const SchedullingDetails: React.FC = () => {
           navigation.navigate("SchedulingComplete");
         })
         .catch((error) => {
-          console.log(error);
+          setLoading(false);
           Alert.alert("Não foi possível confirmar  o agendamento.");
         });
     } catch (error: any) {
@@ -185,6 +187,8 @@ const SchedullingDetails: React.FC = () => {
           title="Confirmar"
           onPress={handleConfirmRental}
           color={theme.colors.success}
+          enabled={!loading}
+          loading={loading}
         />
       </Footer>
     </Container>

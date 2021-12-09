@@ -81,6 +81,8 @@ const Schedulling: React.FC = () => {
     });
   }
 
+  console.log(rentalPeriod.endFormatted);
+
   return (
     <Container>
       <Header>
