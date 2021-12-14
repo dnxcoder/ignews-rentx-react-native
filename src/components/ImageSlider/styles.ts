@@ -7,7 +7,6 @@ interface ImageIndexProps {
 
 export const Container = styled.View`
   width: 100%;
-
 `;
 
 export const ImageIndexes = styled.View`

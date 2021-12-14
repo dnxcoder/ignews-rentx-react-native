@@ -14,8 +14,6 @@ import {
   Archivo_600SemiBold,
 } from "@expo-google-fonts/archivo";
 import theme from "./src/styles/theme";
-import SchedullingDetails from "./src/screens/SchedullingDetails";
-import SchedullingComplete from "./src/screens/SchedullingComplete";
 
 import { Routes } from "./src/routes";
 
