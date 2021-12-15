@@ -58,9 +58,6 @@ const MyCars: React.FC = () => {
     fetchCars();
   }, []);
 
-  function handleBack() {
-    navigation;
-  }
 
   return (
     <Container>

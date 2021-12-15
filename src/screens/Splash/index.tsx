@@ -3,8 +3,6 @@ import React, { useEffect } from "react";
 import BrandSvg from "../../assets/brand.svg";
 import LogoSvg from "../../assets/logo.svg";
 
-import { View } from "react-native";
-
 import { Container } from "./styles";
 import Animated, {
   useAnimatedStyle,
@@ -12,10 +10,13 @@ import Animated, {
   withTiming,
   interpolate,
   Extrapolate,
+  runOnJS,
 } from "react-native-reanimated";
+import { useNavigation } from "@react-navigation/native";
 
 const Splash: React.FC = () => {
   const splashAnimation = useSharedValue(0);
+  const navigation: any = useNavigation();
 
   const brandStyle = useAnimatedStyle(() => {
     return {
@@ -32,6 +33,10 @@ const Splash: React.FC = () => {
       ],
     };
   });
+
+  function startApp() {
+    navigation.navigate("Home");
+  }
 
   const logoStyle = useAnimatedStyle(() => {
     return {
@@ -50,7 +55,10 @@ const Splash: React.FC = () => {
   });
 
   useEffect(() => {
-    splashAnimation.value = withTiming(50, { duration: 1000 });
+    splashAnimation.value = withTiming(50, { duration: 1000 }, () => {
+      "worklet";
+      runOnJS(startApp)();
+    });
   }, []);
 
   return (
