@@ -1,7 +1,7 @@
 import React from "react";
-import { StatusBar } from "react-native";
+import { StatusBar, StyleSheet } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
-
+import { useTheme } from "styled-components";
 import Accessory from "../../components/Accessory";
 import BackButton from "../../components/BackButton";
 import ImageSlider from "../../components/ImageSlider";
@@ -45,6 +45,7 @@ const CarDetails: React.FC = () => {
   const navigation: any = useNavigation();
   const route = useRoute();
   const scrollY = useSharedValue(0);
+  const theme = useTheme();
 
   const { car } = route.params as Params;
 
@@ -68,6 +69,12 @@ const CarDetails: React.FC = () => {
     };
   });
 
+  const sliderCarsStyleAnimation = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(scrollY.value, [0, 150], [1, 0], Extrapolate.CLAMP),
+    };
+  });
+
   return (
     <Container>
       <StatusBar
@@ -75,25 +82,37 @@ const CarDetails: React.FC = () => {
         translucent
         backgroundColor="transparent"
       />
-      <Animated.View style={[headerStyleAnimation]}>
+      <Animated.View
+        style={[
+          headerStyleAnimation,
+          styles.header,
+          {
+            backgroundColor: theme.colors.background_seconday,
+          },
+        ]}
+      >
         <Header>
           <BackButton
+            style={[styles.back]}
             onPress={() => {
               navigation.goBack();
             }}
           />
         </Header>
-        <CarImages>
-          <ImageSlider imageUrl={car.photos} />
-        </CarImages>
+        <Animated.View style={[sliderCarsStyleAnimation]}>
+          <CarImages>
+            <ImageSlider imageUrl={car.photos} />
+          </CarImages>
+        </Animated.View>
       </Animated.View>
       <Animated.ScrollView
         contentContainerStyle={{
           paddingHorizontal: 24,
-          paddingTop: getStatusBarHeight(),
+          paddingTop: getStatusBarHeight() + 160,
         }}
         showsVerticalScrollIndicator={false}
         onScroll={scrollHandler}
+        scrollEventThrottle={16}
       >
         <Details>
           <Description>
@@ -137,3 +156,14 @@ const CarDetails: React.FC = () => {
 };
 
 export default CarDetails;
+
+const styles = StyleSheet.create({
+  header: {
+    position: "absolute",
+    overflow: "hidden",
+    zIndex: 1,
+  },
+  back: {
+    marginTop: 24,
+  },
+});
