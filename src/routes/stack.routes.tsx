@@ -15,7 +15,15 @@ export function StackRoutes() {
   return (
     <Navigator screenOptions={{ headerShown: false }} initialRouteName="Splash">
       <Screen name="Splash" component={Splash} />
-      <Screen name="Home" component={Home} />
+      <Screen
+        name="Home"
+        component={Home}
+
+        //desabilitating going back from IOS
+        options={{
+          gestureEnabled: false,
+        }}
+      />
       <Screen name="CarDetails" component={CarDetails} />
       <Screen name="Schedulling" component={Schedulling} />
       <Screen name="SchedullingDetails" component={SchedullingDetails} />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { StatusBar, StyleSheet } from "react-native";
+import { StatusBar, StyleSheet, BackHandler } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Ionicons } from "@expo/vector-icons";
 import { RectButton, PanGestureHandler } from "react-native-gesture-handler";
@@ -9,7 +9,7 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   useAnimatedGestureHandler,
-  withSpring
+  withSpring,
 } from "react-native-reanimated";
 
 const ButtonAnimated = Animated.createAnimatedComponent(RectButton);
@@ -19,13 +19,7 @@ import Car from "../../components/Car";
 import { api } from "../../services/api";
 import { CarDTO } from "../../dtos/CarDTO";
 
-import {
-  Container,
-  Header,
-  TotalCars,
-  HeaderContent,
-  CarList,
-} from "./styles";
+import { Container, Header, TotalCars, HeaderContent, CarList } from "./styles";
 import Load from "../../components/Load";
 import { useTheme } from "styled-components";
 
@@ -46,18 +40,18 @@ const Home: React.FC = () => {
   });
 
   const onGestureEvent = useAnimatedGestureHandler({
-    onStart(_, ctx: any){
+    onStart(_, ctx: any) {
       ctx.positionX = poisitionX.value;
       ctx.positionY = poisitionY.value;
     },
-    onActive(event, ctx:any){
+    onActive(event, ctx: any) {
       poisitionX.value = event.translationX + ctx.positionX;
       poisitionY.value = event.translationY + ctx.positionY;
     },
-    onEnd(){
+    onEnd() {
       poisitionX.value = withSpring(0);
       poisitionY.value = withSpring(0);
-    }
+    },
   });
 
   const navigation: any = useNavigation();
@@ -75,6 +69,13 @@ const Home: React.FC = () => {
     }
 
     fetchCars();
+  }, []);
+
+  useEffect(() => {
+    // Preventing back button on android
+    BackHandler.addEventListener("hardwareBackPress", () => {
+      return true;
+    });
   }, []);
 
   function handleCarDetails(car: CarDTO) {
@@ -95,7 +96,7 @@ const Home: React.FC = () => {
       <Header>
         <HeaderContent>
           <Logo width={RFValue(108)} height={RFValue(12)} />
-          <TotalCars>Total de {cars.length} carros</TotalCars>
+          {!loading && <TotalCars>Total de {cars.length} carros</TotalCars>}
         </HeaderContent>
       </Header>
       {loading ? (
