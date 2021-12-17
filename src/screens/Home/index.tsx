@@ -20,7 +20,7 @@ import { api } from "../../services/api";
 import { CarDTO } from "../../dtos/CarDTO";
 
 import { Container, Header, TotalCars, HeaderContent, CarList } from "./styles";
-import Load from "../../components/Load";
+import LoadAnimation from "../../components/LoadAnimation";
 import { useTheme } from "styled-components";
 
 const Home: React.FC = () => {
@@ -100,7 +100,7 @@ const Home: React.FC = () => {
         </HeaderContent>
       </Header>
       {loading ? (
-        <Load />
+        <LoadAnimation />
       ) : (
         <CarList
           data={cars}
