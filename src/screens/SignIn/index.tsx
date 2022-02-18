@@ -24,8 +24,15 @@ const SignIn: React.FC = () => {
         começar uma experiência incrível.
       </SubTilte>
       <Form>
+        <Input
+          iconName="mail"
+          placeholder="E-mail"
+          keyboardType="email-address"
+          autoCorrect={false}
+          autoCapitalize="none"
+        />
         <Input iconName="mail" />
-        <Input />
+        {/* <Input /> */}
       </Form>
       <Footer>
         <Button
