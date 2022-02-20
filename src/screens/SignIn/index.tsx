@@ -2,6 +2,7 @@ import React from "react";
 import { View, StatusBar } from "react-native";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import PasswordInput from "../../components/PasswordInput";
 import theme from "../../styles/theme";
 import { Container, Header, Title, SubTilte, Footer, Form } from "./styles";
 
@@ -31,7 +32,7 @@ const SignIn: React.FC = () => {
           autoCorrect={false}
           autoCapitalize="none"
         />
-        <Input iconName="mail" />
+        <PasswordInput iconName="lock" placeholder="Senha" secureTextEntry />
         {/* <Input /> */}
       </Form>
       <Footer>
