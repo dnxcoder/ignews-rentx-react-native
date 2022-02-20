@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-  View,
   StatusBar,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
@@ -13,6 +12,9 @@ import theme from "../../styles/theme";
 import { Container, Header, Title, SubTilte, Footer, Form } from "./styles";
 
 const SignIn: React.FC = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -43,11 +45,15 @@ const SignIn: React.FC = () => {
               keyboardType="email-address"
               autoCorrect={false}
               autoCapitalize="none"
+              onChangeText={setEmail}
+              value={email}
             />
             <PasswordInput
               iconName="lock"
               placeholder="Senha"
               secureTextEntry
+              onChangeText={setPassword}
+              value={password}
             />
             {/* <Input /> */}
           </Form>
