@@ -32,8 +32,8 @@ const PasswordInput: React.FC<InputProps> = ({ iconName, value, ...rest }) => {
   }, []);
 
   return (
-    <Container isFocused={isFocused}>
-      <IconContainer>
+    <Container>
+      <IconContainer isFocused={isFocused}>
         <Feather
           name={iconName}
           size={24}
@@ -44,12 +44,12 @@ const PasswordInput: React.FC<InputProps> = ({ iconName, value, ...rest }) => {
       </IconContainer>
       <InputText
         {...rest}
+        isFocused={isFocused}
         secureTextEntry={!isPasswordVisible}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
-
       />
-      <IconContainer>
+      <IconContainer isFocused={isFocused}>
         <BorderlessButton onPress={handlePasswordVisibilityChange}>
           <Feather
             name={isPasswordVisible ? "eye" : "eye-off"}
