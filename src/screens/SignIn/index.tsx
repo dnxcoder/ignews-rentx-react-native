@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
   StatusBar,
   KeyboardAvoidingView,
@@ -17,12 +18,15 @@ const SignIn: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  async function handleSignIn() {
+  const navigation: any = useNavigation();
 
-    console.log('hellow')
+  async function handleSignIn() {
+    console.log("hellow");
     try {
       const schema = Yup.object({
-        email: Yup.string().required("E-mail obrigatório").email('Digite um e-mail válido'),
+        email: Yup.string()
+          .required("E-mail obrigatório")
+          .email("Digite um e-mail válido"),
         password: Yup.string().required("A senha é obrigatória"),
       });
       await schema.validate({ email, password });
@@ -40,6 +44,10 @@ const SignIn: React.FC = () => {
       }
     }
   }
+
+  const handleNewAccount = () => {
+    navigation.navigate("SignUpFirstStep");
+  };
 
   return (
     <TouchableWithoutFeedback
@@ -94,7 +102,7 @@ const SignIn: React.FC = () => {
               color={theme.colors.background_seconday}
               title="Criar conta gratuita"
               onPress={() => {
-                handleSignIn;
+                handleNewAccount();
               }}
               enabled={true}
               loading={false}
