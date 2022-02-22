@@ -12,23 +12,21 @@ import {
   Form,
   Gap,
 } from "./styles";
-import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
+import PasswordInput from "../../../components/PasswordInput";
+import { useTheme } from "styled-components";
 
-const SignUpFirstStep: React.FC = () => {
-  const navigation: any = useNavigation();
+const SignUpSecondStep: React.FC = () => {
+  const navigation = useNavigation();
+  const theme = useTheme();
 
   function handleBack() {
     navigation.goBack();
-  }
-
-  function handleNextStep() {
-    navigation.navigate("SignUpSecondStep");
   }
 
   return (
@@ -54,26 +52,17 @@ const SignUpFirstStep: React.FC = () => {
           </SubTitle>
 
           <Form>
-            <FormTitle>1. Dados</FormTitle>
-            <Input iconName="user" placeholder="Nome" />
+            <FormTitle>2. Senha</FormTitle>
+            <PasswordInput placeholder="Nome" iconName="lock" />
             <Gap />
-            <Input
-              iconName="mail"
-              placeholder="E-mail"
-              keyboardType="email-address"
-            />
+            <PasswordInput placeholder="Repetir Senha" iconName="lock" />
             <Gap />
-            <Input
-              iconName="credit-card"
-              placeholder="CNH"
-              keyboardType="numeric"
-            />
           </Form>
-          <Button title="Próximo" onPress={handleNextStep} />
+          <Button title="Cadastrar" color={theme.colors.success} />
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
 };
 
-export default SignUpFirstStep;
+export default SignUpSecondStep;
