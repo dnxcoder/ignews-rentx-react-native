@@ -29,13 +29,14 @@ import {
   Alert,
 } from "react-native";
 import PasswordInput from "../../../components/PasswordInput";
+import Confirmation from "../../Confirmation";
 import { useTheme } from "styled-components";
 
 const SignUpSecondStep: React.FC = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
-  const navigation = useNavigation();
+  const navigation: any = useNavigation();
   const route = useRoute();
   const theme = useTheme();
 
@@ -50,9 +51,17 @@ const SignUpSecondStep: React.FC = () => {
     if (!password || !passwordConfirm) {
       return Alert.alert("Informe a senha e a confirmação.");
     }
-    if (password  != passwordConfirm) {
+    if (password != passwordConfirm) {
       return Alert.alert("As senhas não iguais iguais.");
     }
+
+    // Enviar para a API e cadastrar.
+
+    navigation.navigate("Confirmation", {
+      nextScreenRoute: "SignIn",
+      title: "Conta Criada!",
+      message: `Agora é só fazer login\ne aproveitar.`,
+    });
   }
 
   return (
