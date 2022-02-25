@@ -21,12 +21,16 @@ import {
   Alert,
 } from "react-native";
 import * as Yup from "yup";
+import { useAuth } from "../../../hook/auth";
 
 const SignUpFirstStep: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [driverLicense, setDriverLicense] = useState("");
   const navigation: any = useNavigation();
+  const { user } = useAuth();
+  
+  console.log("Usuário autenticado", user);
 
   function handleBack() {
     navigation.goBack();
@@ -37,8 +41,8 @@ const SignUpFirstStep: React.FC = () => {
       const schema = Yup.object().shape({
         driverLicense: Yup.string().required("CNH é obrigatória"),
         email: Yup.string()
-        .email("E-mail inválido")
-        .required("E-mail obrigatório"),
+          .email("E-mail inválido")
+          .required("E-mail obrigatório"),
         name: Yup.string().required("Nome é obrigatório"),
       });
 

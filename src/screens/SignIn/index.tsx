@@ -13,15 +13,17 @@ import PasswordInput from "../../components/PasswordInput";
 import theme from "../../styles/theme";
 import { Container, Header, Title, SubTilte, Footer, Form } from "./styles";
 import * as Yup from "yup";
+import { useAuth } from "../../hook/auth";
 
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { signIn } = useAuth();
+
   const navigation: any = useNavigation();
 
   async function handleSignIn() {
-    console.log("hellow");
     try {
       const schema = Yup.object({
         email: Yup.string()
@@ -30,9 +32,10 @@ const SignIn: React.FC = () => {
         password: Yup.string().required("A senha é obrigatória"),
       });
       await schema.validate({ email, password });
-      Alert.alert("tudo certo");
 
       //Fazer login
+      await signIn({ email, password });
+      Alert.alert("tudo certo");
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert("Opa", error.message);
@@ -41,6 +44,7 @@ const SignIn: React.FC = () => {
           "Erro na autenticação",
           "Ocorreu um erro ao fazer login, verifique as credenciais"
         );
+        console.log('aqui');
       }
     }
   }
